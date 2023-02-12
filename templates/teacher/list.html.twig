@@ -1,0 +1,58 @@
+
+<table >
+
+    {%for club in listeTableau%}  <tr>
+
+        <td>{{club.ref}}</td>
+        <td>{{club.Titre|upper()}}</td>
+        <td>{{club.Description}}</td>
+        <td>{{club.date_debut}}</td>
+        <td>{{club.date_fin}}</td>
+        <td>{{club.nb_participants}}</td>
+        {#{% endif %}#}
+        {#{% endif %}#}
+
+
+        <td>{% if club.nb_participants==0%}
+            <form action="{{path('detail',{'id':club.ref }) }}">
+                <button>Participer</button></form>
+
+
+              
+            {% endif %}
+        </td>
+
+
+    </tr>    {% endfor %}
+</table>
+
+
+
+
+<p> question 4</p>
+le nombre de formation est {{ listeTableau|length }}
+
+
+
+{% set maxValue = 0 %}
+
+{% for club in listeTableau %}
+{% set maxValue = max(club.nb_participants, maxValue) %}
+{% endfor %}
+ {%for club in listeTableau%} 
+  {%  if club.nb_participants == maxValue %}
+ 
+ <p> question 6 </p>
+<p> le titre de la formation ayant le plus grand nombre de participants est {{club.Titre}}  </p>
+{% endif %}
+{% endfor %}
+
+<p> question 7 </p>
+{% set nbTot = 0 %}
+
+{% for club in listeTableau %}
+    {% set nbTot = nbTot + club.nb_participants %}
+{% endfor %}
+<p> Le nombre total des particpants est </tot>{{ nbTot }} </p>
+
+
